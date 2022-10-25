@@ -1,4 +1,4 @@
-function [a, e, i, ohm, omega, theta] = rv2parorb(rr, vv, mu)
+function [a, e, i, OM, om, th] = rv2parorb(rr, vv, mu)
 %  Conversione da vettori di stato ([x, y, z], [vx, vy, vz]) in forma vettoriale a parametri kepleriani (a, e i, ohm, omega, theta)
 % Parametro extra di input che definisce la costante di gravitazionale
 
@@ -21,17 +21,17 @@ nn = cross([0 0 1]', hh)./norm(cross([0 0 1]', hh)); %Linea dei nodi
 
 
 if nn(2)>= 0
-    ohm = acos(nn(1));
+    OM = acos(nn(1));
 else
-    ohm = 2*pi() - acos(nn(1));
+    OM = 2*pi() - acos(nn(1));
 end
 % Calcolo dell'ascensione retta del nodo ascendente
 
 
 if ee(3) >= 0
-    omega = acos(ee'*nn/e);
+    om = acos(ee'*nn/e);
 else
-    omega = 2*pi() - acos(ee'*nn/e);
+    om = 2*pi() - acos(ee'*nn/e);
 end
 
 % Calcolo argomento del pericentro
@@ -39,9 +39,9 @@ end
 vr = dot(vv, rr)/r;
 
 if vr >= 0
-    theta = acos(dot(ee, rr)/(norm(ee)*norm(rr)));
+    th = acos(dot(ee, rr)/(norm(ee)*norm(rr)));
 else
-    theta = 2*pi() - acos(dot(ee, rr)/(norm(ee)*norm(rr)));
+    th = 2*pi() - acos(dot(ee, rr)/(norm(ee)*norm(rr)));
 end
 
 end
