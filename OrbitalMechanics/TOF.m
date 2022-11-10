@@ -19,5 +19,8 @@ E2 = 2 * atan(sqrt((1 - e)/(1 + e)) * tan(th2/2));                     %Calcolo 
 
 deltat = sqrt((a^3)/mu) * ((E2-E1) - e * (sin(E2) - sin(E1)));         %Calcolo TOF
 
+if th2<th1                                                             %
+    deltat = deltat + 2 * pi() * sqrt((a^3) / mu);
+
 end
 
