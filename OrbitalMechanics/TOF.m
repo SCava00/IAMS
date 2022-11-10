@@ -13,13 +13,11 @@ function [deltat] = TOF(a, e, th1, th2, mu)
          - Tempo di trasferimento tra le anomalie
 %}
 
-dth = th2-th1;
 
-E = 2 * atan(sqrt((1 - e)/(1 + e)) * tan(dth/2)); %Calcolo anomalia eccentrica E
+E1 = 2 * atan(sqrt((1 - e)/(1 + e)) * tan(th1/2));                     %Calcolo anomalia eccentrica E1
+E2 = 2 * atan(sqrt((1 - e)/(1 + e)) * tan(th2/2));                     %Calcolo anomalia eccentrica E2
 
-M = E - e*sin(E);                                 %Calcolo anomalia media M
-
-deltat = sqrt((a^3)/mu) * M;                      %Calcolo TOF
+deltat = sqrt((a^3)/mu) * ((E2-E1) - e * (sin(E2) - sin(E1)));         %Calcolo TOF
 
 end
 
